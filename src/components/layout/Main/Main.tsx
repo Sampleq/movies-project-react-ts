@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Cards } from '../../Cards';
-import { Search } from '../../Search';
-import type { Movie, SearchState } from '../../../types';
-import { fetchData } from '../../../utils/fetchData';
-import { Preloader } from '../../Preloader';
+import { Cards } from '@/components/Cards';
+import { Search } from '@/components/Search';
+import type { Movie, SearchState } from '@/types';
+import { fetchData } from '@/utils/fetchData';
+import { Preloader } from '@/components/Preloader';
 
 import styles from './Main.module.scss';
 

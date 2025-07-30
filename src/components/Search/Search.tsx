@@ -1,5 +1,6 @@
 import styles from './Search.module.scss';
-import type { SearchState } from '../../types';
+// import type { SearchState } from '../../types';
+import type { SearchState } from '@/types';
 
 interface SearchProps {
   currentSearchState: SearchState;
