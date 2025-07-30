@@ -1,0 +1,24 @@
+.header {
+  background-color: #43a047;
+  padding: 2rem 4rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-size: 3rem;
+    a {
+      color: #fff;
+    }
+  }
+
+  ul {
+    display: flex;
+    font-size: 1.8rem;
+    list-style: none;
+    li a {
+      color: #fff;
+    }
+  }
+}

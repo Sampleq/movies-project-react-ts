@@ -1,0 +1,22 @@
+.footer {
+  background-color: lighten($color: #43a047, $amount: 20);
+  padding: 2rem 4rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .copy {
+    font-size: 1.6rem;
+    color: #fff;
+  }
+
+  ul {
+    display: flex;
+    font-size: 1.8rem;
+    list-style: none;
+    li a {
+      color: #fff;
+    }
+  }
+}
