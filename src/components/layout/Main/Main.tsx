@@ -24,7 +24,7 @@ export const Main = ({}: MainProps) => {
    * 
   Send all data requests to:
 
-  http://www.omdbapi.com/?apikey=[yourkey]&
+  https://www.omdbapi.com/?apikey=[yourkey]&
 
   Poster API requests:
 

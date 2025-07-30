@@ -5,12 +5,15 @@ interface HeaderProps {}
 export const Header = ({}: HeaderProps) => {
   return (
     <header className={styles.header}>
-      <h1>
-        <a href='#'>React Movies</a>
-      </h1>
-      <ul id='nav-mobile'>
+      <h1>React Movies</h1>
+      <ul>
         <li>
-          <a href='#'>Repo</a>
+          <a
+            href='https://github.com/Sampleq/movies-project-react-ts'
+            target='_blank'
+          >
+            Repo
+          </a>
         </li>
       </ul>
     </header>
