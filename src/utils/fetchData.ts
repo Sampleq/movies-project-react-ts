@@ -6,11 +6,13 @@ export async function fetchData(
   type: string
 ) {
   const response = await fetch(
-    `http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchPrompt}&type=${type}`
+    `http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchPrompt}${
+      type ? `&type=${type}` : ''
+    }`
   );
 
   const data: ResponseOmdbApi = await response.json();
 
-  console.log(data);
+  //   console.log(data);
   return data;
 }

@@ -1,5 +1,8 @@
+@use 'sass:color'; // https://sass-lang.com/documentation/breaking-changes/color-functions/
+
 .footer {
-  background-color: lighten($color: #43a047, $amount: 20);
+  $color: #43a047;
+  background-color: color.adjust($color, $lightness: 20%);
   padding: 2rem 4rem;
 
   display: flex;
