@@ -1,51 +1,49 @@
-import { useState } from 'react';
 import styles from './Search.module.scss';
 import type { SearchState } from '../../types';
 
 interface SearchProps {
+  currentSearchState: SearchState;
   setCurrentSearchState: (searchState: SearchState) => void;
+  updateMovies: (currentSearchState: SearchState) => void;
 }
 
-export const initialState: SearchState = {
-  searchPrompt: 'matrix',
-  type: '',
-};
-
-export const Search = ({ setCurrentSearchState }: SearchProps) => {
+export const Search = ({
+  currentSearchState,
+  setCurrentSearchState,
+  updateMovies,
+}: SearchProps) => {
   function inputTextHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setSearchState({
-      ...searchState,
+    setCurrentSearchState({
+      ...currentSearchState,
       [event.target.name]: event.target.value,
     });
   }
   function inputRadioHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const newSearchState = {
-      ...searchState,
+      ...currentSearchState,
       [event.target.name]: event.target.value,
     };
 
-    setSearchState(newSearchState);
+    setCurrentSearchState(newSearchState);
 
-    setCurrentSearchState(newSearchState); // update main content when change
+    updateMovies(newSearchState);
   }
 
   function submitHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (searchState.searchPrompt === '') {
+    if (currentSearchState.searchPrompt === '') {
       alert('Enter name of movie, series, etc., please!');
       return;
     }
 
     // alert(JSON.stringify(searchState));
-    setCurrentSearchState(searchState);
+    setCurrentSearchState(currentSearchState);
 
-    // setSearchState(initialState);
+    updateMovies(currentSearchState);
   }
 
-  const [searchState, setSearchState] = useState<SearchState>(initialState);
-
-  console.log('searchState', searchState);
+  console.log('currentSearchState', currentSearchState);
 
   return (
     <form className={styles.search} onSubmit={submitHandler}>
@@ -53,7 +51,7 @@ export const Search = ({ setCurrentSearchState }: SearchProps) => {
         type='text'
         name='searchPrompt'
         placeholder='Search movies, series, etc.'
-        value={searchState.searchPrompt}
+        value={currentSearchState.searchPrompt}
         onChange={inputTextHandler}
       />
 
@@ -64,7 +62,7 @@ export const Search = ({ setCurrentSearchState }: SearchProps) => {
             name='type'
             value=''
             onChange={inputRadioHandler}
-            checked={searchState.type === ''}
+            checked={currentSearchState.type === ''}
           />
           All
         </label>
@@ -74,7 +72,7 @@ export const Search = ({ setCurrentSearchState }: SearchProps) => {
             name='type'
             value='movie'
             onChange={inputRadioHandler}
-            checked={searchState.type === 'movie'}
+            checked={currentSearchState.type === 'movie'}
           />
           Movies only
         </label>
@@ -84,7 +82,7 @@ export const Search = ({ setCurrentSearchState }: SearchProps) => {
             name='type'
             value='series'
             onChange={inputRadioHandler}
-            checked={searchState.type === 'series'}
+            checked={currentSearchState.type === 'series'}
           />
           Series only
         </label>

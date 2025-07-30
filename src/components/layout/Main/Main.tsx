@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Cards } from '../../Cards';
-import { initialState, Search } from '../../Search';
+import { Search } from '../../Search';
 import styles from './Main.module.scss';
-import type { Movie, ResponseOmdbApi, SearchState } from '../../../types';
+import type { Movie, SearchState } from '../../../types';
+import { fetchData } from '../../../utils/fetchData';
+
+export const initialState: SearchState = {
+  searchPrompt: 'matrix',
+  type: '',
+};
 
 interface MainProps {}
 
@@ -19,7 +25,7 @@ export const Main = ({}: MainProps) => {
   Poster API requests:
 
   http://img.omdbapi.com/?apikey=[yourkey]&
-  
+
   Generate super-fast placeholder images
 
   https://placeholders.dev/
@@ -28,36 +34,34 @@ export const Main = ({}: MainProps) => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const [currentSearchState, setCurrentSearchState] =
-    // useState<SearchState>(initialState);
-    useState<SearchState>({
-      searchPrompt: 'matrix',
-      type: '',
-    });
+    useState<SearchState>(initialState);
+
+  async function updateMovies(currentSearchState: SearchState) {
+    const data = await fetchData(
+      API_KEY,
+      currentSearchState.searchPrompt,
+      currentSearchState.type
+    );
+
+    if (data.Response === 'True') {
+      setMovies(data.Search);
+    } else {
+      alert(`Error: ${data.Error}`);
+    }
+  }
 
   useEffect(() => {
-    // fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
-    fetch(
-      `http://www.omdbapi.com/?apikey=${API_KEY}&s=${currentSearchState.searchPrompt}&type=${currentSearchState.type}`
-    )
-      .then((response) => response.json())
-      .then((data: ResponseOmdbApi) => {
-        console.log(
-          data,
-          currentSearchState.searchPrompt,
-          currentSearchState.type
-        );
-        if (data.Response === 'True') {
-          setMovies(data.Search);
-        } else {
-          alert(`Error: ${data.Error}`);
-        }
-      });
-  }, [currentSearchState.searchPrompt, currentSearchState.type]);
+    updateMovies(currentSearchState);
+  }, []);
 
   return (
     <div className={styles.main}>
       <div className={styles.wrapper}>
-        <Search setCurrentSearchState={setCurrentSearchState} />
+        <Search
+          currentSearchState={currentSearchState}
+          setCurrentSearchState={setCurrentSearchState}
+          updateMovies={updateMovies}
+        />
 
         {movies.length ? <Cards movies={movies} /> : <h2>Loading...</h2>}
       </div>
