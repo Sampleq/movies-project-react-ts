@@ -15,9 +15,9 @@ export const initialState: SearchState = {
 interface MainProps {}
 
 export const Main = ({}: MainProps) => {
-  console.log('   Main()');
+  // console.log('   Main()');
 
-  // OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=_REGISTER_AND_GET_YOUR_API_KEY_
+  // OMDb API: https://www.omdbapi.com/?i=tt3896198&apikey=_REGISTER_AND_GET_YOUR_API_KEY_
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   /**
@@ -77,10 +77,10 @@ export const Main = ({}: MainProps) => {
         />
 
         {isLoading ? (
-          <p>
+          <div>
             <Preloader />
             Loading...
-          </p>
+          </div>
         ) : typeof movies === 'string' ? (
           <h2>{movies}</h2>
         ) : (

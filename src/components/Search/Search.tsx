@@ -43,7 +43,7 @@ export const Search = ({
     updateMovies(currentSearchState);
   }
 
-  console.log('currentSearchState', currentSearchState);
+  // console.log('currentSearchState', currentSearchState);
 
   return (
     <form className={styles.search} onSubmit={submitHandler}>

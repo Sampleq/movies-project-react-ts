@@ -6,7 +6,7 @@ export async function fetchData(
   type: string
 ) {
   const response = await fetch(
-    `http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchPrompt}${
+    `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchPrompt}${
       type ? `&type=${type}` : ''
     }`
   );
